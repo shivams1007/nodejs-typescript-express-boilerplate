@@ -1,35 +1,31 @@
-"use strict";
 import { Sequelize } from 'sequelize';
+import { DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from '../helpers/config';
 
-const DATABASE: any = process.env.DATABASE;
-const USER: any = process.env.DB_USER;
-const PASSWORD: any = process.env.DB_PASSWORD;
-const HOST: any = process.env.DB_HOST;
-const PORT: any = process.env.DB_PORT;
-const sequelize = new Sequelize(DATABASE, USER, PASSWORD, {
-    host: HOST,
+
+
+const sequelize: any = new Sequelize(DATABASE, DB_USER, DB_PASSWORD, {
+    host: DB_HOST,
     dialect: 'mysql',
-    port: PORT,
+    port: DB_PORT,
     pool: {
         max: 25,
         min: 0,
         idle: 10000
     },
     logging: true,
+    username: DB_USER,
+    password: DB_PASSWORD,
+    ssl: true,
     define: {
         timestamps: false,
     }
 });
 
+
 sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');
-}).catch(async function (err) {
+}).catch(async function (err: any) {
     console.log('Unable to connect to the database:', err);
 });
 
-
-const db: any = {};
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-export { db as default };
+export { sequelize as default };

@@ -1,8 +1,8 @@
 import jwt from 'jwt-simple';
-const TOKEN = process.env.JWT_TOKEN || 'secret';
+import { TOKEN_SECRET_KEY } from './config';
 
-const encode = (data: any) => jwt.encode(data, TOKEN)
+const encode = (data: any) => jwt.encode(data, TOKEN_SECRET_KEY);
 
-const decode = (data: any) => jwt.decode(data, TOKEN)
+const decode = (data: any) => jwt.decode(data, TOKEN_SECRET_KEY);
 
-export { encode, decode }
+export { encode, decode };
