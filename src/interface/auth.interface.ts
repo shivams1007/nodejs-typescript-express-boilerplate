@@ -1,5 +1,6 @@
 export interface Token {
-    id: number;
+    user_id: number;
     email_address: string;
-    password: string;
+    iat: number;
+    exp: number;
 }
